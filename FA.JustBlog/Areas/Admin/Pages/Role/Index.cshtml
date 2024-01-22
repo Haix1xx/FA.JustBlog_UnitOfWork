@@ -1,0 +1,66 @@
+﻿@page "/admin/roles/"
+@model FA.JustBlog.Areas.Admin.Pages.Role.IndexModel
+@{
+    ViewData["Title"] = "Role Management";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<partial name="_StatusMessage" model="@Model.StatusMessage"/>
+<a class="btn btn-secondary" asp-page="Create">Add New Role</a>
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">@ViewData["Title"]</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Dashboard</a></li>
+        <li class="breadcrumb-item active">Tables</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-body">
+            DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
+            <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
+            .
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            @ViewData["Title"]
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Role Name</th>
+                        <th class="d-flex flex-row">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Id</th>
+                        <th>Role Name</th>
+                        <th class="d-flex flex-row">
+                            Action
+                        </th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var role in Model.Roles)
+                    {
+                        <tr>
+                            <td>@role.Id</td>
+                            <td>@role.Name</td>
+                            <td class="d-flex flex-row">
+                                <a class="btn btn-success" asp-page="Edit" asp-route-id="@role.Id"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a class="btn btn-danger" asp-page="Delete" asp-route-id="@role.Id"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

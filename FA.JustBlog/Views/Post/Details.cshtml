@@ -1,0 +1,28 @@
+﻿@using FA.JustBlog.Helpers
+@model FA.JustBlog.Core.Models.Post
+
+@{
+    // ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h1 style="color: var(--bs-teal)">@Model.Title</h1>
+    <p class="post-meta">
+        Posted @Model.PostedOn with rate @Model.Rate.ToString("F") by @Model.ViewCount view(s)
+    </p>
+    <hr />
+    <p>@Model.PostContent</p>
+    <h6>Category: @Html.CategoryLink(Model.Category)</h6>
+    <div class="d-flex flex-row">
+        <h6 class="align-text-bottom align-self-center">Tag: </h6>
+        @foreach (var postTag in Model.PostTags)
+        {
+            @Html.TagLink(postTag.Tag)
+        }
+    </div>
+</div>
+@* <div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div> *@

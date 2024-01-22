@@ -1,0 +1,25 @@
+﻿@using FA.JustBlog.Core.Models;
+@using FA.JustBlog.Helpers;
+@model Post
+
+@{
+    var post = Model;
+    var routeData = new Dictionary<string, string> 
+    { 
+        { "year", post.PostedOn.Year.ToString() }, 
+        { "month", post.PostedOn.Month.ToString() },
+        { "slug", post.UrlSlug }
+    };
+}
+
+<div class="post-preview">
+    <a asp-controller="Post" asp-action="Details" asp-all-route-data="@routeData">
+        <h5 class="post-title">@post.Title</h5>
+    </a>
+    @Html.FriendlyDateTime(post.PostedOn, post.Rate, post.ViewCount)
+    @* <p class="post-meta">
+        Posted @post.PostedOn with rate @post.Rate.ToString("F") by @post.ViewCount view(s)
+    </p> *@
+
+    <p>@post.ShortDescription</p>
+</div>

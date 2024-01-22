@@ -1,0 +1,79 @@
+﻿@model IEnumerable<FA.JustBlog.Core.Models.Category>
+
+@{
+    var index = 1;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        <a class="btn btn-primary" asp-action="Create">Create New</a>
+    </p>
+
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">@ViewData["Title"]</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Dashboard</a></li>
+            <li class="breadcrumb-item active">Tables</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-body">
+                DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
+                <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
+                .
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                @ViewData["Title"]
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>UrlSlug</th>
+                            <th>Description</th>
+                            <th class="d-flex">Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>UrlSlug</th>
+                            <th>Description</th>
+                            <th class="d-flex">Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var category in Model)
+                        {
+                            <tr>
+                                <td>@index</td>
+                                <td>@category.Name</td>
+                                <td>@category.UrlSlug</td>
+                                <td>@category.Description</td>
+                                <td class="d-flex gap-1">
+                                    <div class="d-flex g-1">
+                                        <a class="btn btn-success" asp-action="Edit" asp-route-id="@category.Id"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@category.Id"><i class="fa-solid fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            index++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

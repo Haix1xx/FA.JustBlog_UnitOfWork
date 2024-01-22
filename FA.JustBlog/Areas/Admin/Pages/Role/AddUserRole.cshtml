@@ -1,0 +1,50 @@
+﻿@page "/admin/role/user/add/{id}"
+@model FA.JustBlog.Areas.Admin.Pages.Role.AddUserRoleModel
+@{
+    ViewData["Title"] = "Assign Role";
+}
+
+<h4>@ViewData["Title"]</h4>
+<div class="row">
+    <div class="col-md-6">
+        <p>Chọn các role gán cho <strong>@Model.Input.UserName\</strong></p>
+        <form method="post">
+            <partial name="_StatusMessage" model="@Model.StatusMessage" />
+            <div class="form-group">
+                @* @Html.LabelFor(x => x.Input.Roles)
+                @Html.ListBoxFor(x => x.Input.Roles,
+                new SelectList( Model.AllRoles ),
+                new {@class="w-100", id = "selectrole"}) *@
+                <div class="form-group">
+                    <label asp-for="Input.Roles" class="control-label">Role</label>
+                    <select asp-for="Input.Roles" class="form-control" multiple>
+                        @foreach(var role in Model.AllRoles)
+                        {
+                            <option value="@role">@role</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" asp-for="Input.Id">
+            <a class="btn btn-primary" asp-page="./User">Danh sách</a>
+            <button type="submit" class="btn btn-danger">Cập nhật</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @* <script src="~/lib/multiple-select/multiple-select.min.js"></script>
+    <link rel="stylesheet" href="~/lib/multiple-select/multiple-select.min.css" />
+    <script>
+        $('#selectrole').multipleSelect({
+            selectAll: false,
+            keepOpen: false,
+            isOpen: false
+        });
+    </script> *@
+
+
+    <partial name="_ValidationScriptsPartial" />
+}
